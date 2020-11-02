@@ -7,10 +7,24 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = discord.Client()
+def get_some_text():
+    f = open('testText.txt', "r")
+    f.close()
+    return f
+
+client= commands.Bot(command_prefix = '.')
 
 @client.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    print('Bot is ready. ')
+
+@client.command()
+async def respond(ctx):
+    await ctx.send('hello #8')
+
+@client.command()
+async def test(ctx):
+    await ctx.send(get_some_text())
+
 
 client.run(TOKEN)
